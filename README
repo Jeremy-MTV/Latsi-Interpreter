@@ -1,0 +1,73 @@
+### README pour le projet d'interpréteur LATSI en OCaml
+
+---
+
+#### Architecture
+
+Le projet est structuré de la manière suivante :
+- `dune-project` : fichier de configuration du projet Dune.
+- `dune` : fichier de configuration des bibliothèques et exécutables.
+- `ast.ml` : définition des types de l'arbre syntaxique abstrait.
+- `lexer.mll` : analyseur lexical généré par ocamllex.
+- `parser.mly` : analyseur syntaxique généré par Menhir.
+- `interpreter.ml` : implémentation de l'interpréteur LATSI.
+- `fichier_test` : répertoire contenant les fichiers de test.
+- `executable` : répertoire contenant les exécutables du projet.
+
+#### Tokens
+
+Les tokens utilisés par l'analyseur lexical et syntaxique incluent :
+- `IMPRIME`
+- `SI`
+- `ALORS`
+- `VAVERS`
+- `ENTREE`
+- `FIN`
+- `REM`
+- `NL`
+- `VAR` (pour les variables de A à Z)
+- `NOMBRE` (pour les nombres)
+- `STRING` (pour les chaînes de caractères)
+- `PLUS`, `MOINS`, `MULT`, `DIV` (opérateurs arithmétiques)
+- `EQUAL`, `INF`, `SUP` (opérateurs relationnels)
+
+#### Organisation
+
+L'organisation du projet est la suivante :
+1. **Lexeur** : défini dans `lexer.mll`, il transforme le texte source en tokens.
+2. **Analyseur Syntaxique** : défini dans `parser.mly`, il transforme les tokens en arbre syntaxique abstrait (AST).
+3. **Interpréteur** : défini dans `interpreter.ml`, il exécute le programme en parcourant l'AST.
+
+#### Fonctions et leurs fonctionnalités dans `interpreter.ml`
+
+- `eval_expr` : évalue une expression arithmétique.
+- `eval_cond` : évalue une condition (comparaison).
+- `execute_instr` : exécute une instruction LATSI.
+- `execute_program` : exécute un programme complet en itérant sur les lignes.
+
+Globalement, le programme se comporte en parsant chaque ligne, il lit le premier nombre, il les trie du plus petit au plus grand puis execute les lignes dans l'ordre dans lequel il les à trier. 
+
+#### Compilation du projet
+
+Pour compiler le projet, utilisez les commandes suivantes :
+```bash
+dune clean
+dune build
+```
+Ensuite, rendez-vous dans le répertoire `_build/default` pour trouver l'exécutable généré.
+
+#### Fichiers de test
+
+Les fichiers de test se trouvent dans le dossier `fichier_test`. Ils contiennent des programmes LATSI à exécuter pour vérifier le bon fonctionnement de l'interpréteur.
+
+#### Exécutables et code source
+
+Les exécutables sont placés dans le dossier `executable`, on a choisi de ne pas mettre tout les codes des différentes extensions dans la même branche par soucis de factorisation, donc les executables des différentes extensions sont dans le dossier `executable` mais les fichiers présents ici ne sont que pour les étapes 1 à 4 du projet.  Pour voir le code source des extensions , consultez les différentes branches du dépôt sur moule.
+
+#### Exécution du projet
+
+Pour exécuter le projet, utilisez la commande suivante :
+```bash
+./interpreter.exe <chemin/vers/fichier_test>
+```
+

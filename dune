@@ -1,0 +1,51 @@
+; (ocamllex
+;  (modules lexer))
+; (menhir
+;   (modules parser)
+;   (infer true)
+;   (flags --explain --dump))
+
+; (executable
+;  (name interpreter))
+
+
+(ocamllex
+ (modules lexer))
+(menhir
+ (modules parser)
+ (infer true)
+ (flags --explain --dump))
+
+(executable
+ (name interpreter)
+ (modules ast lexer parser interpreter))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+; (executable
+;  (name interpreter)
+;  (modules ast lexer parser interpreter)
+;  (libraries menhirLib))
+
+;  (executable
+;  (name ast)
+;  (libraries menhirLib))
+
+
+; (executable
+;  (name interpreter)
+;  (modules lexer parser ast interpreter)
+;  (libraries menhirLib))
